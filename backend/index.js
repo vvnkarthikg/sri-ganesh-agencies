@@ -30,7 +30,7 @@ app.use(express.urlencoded({ extended: true }));
 
 const allowedOrigins = [
   'http://localhost:5173', // local Vite dev server
-  'https://your-frontend-domain.com', // your hosted frontend
+  'https://sri-ganesh-agencies.vercel.app/', // your hosted frontend
 ];
 
 const corsOptions = {
