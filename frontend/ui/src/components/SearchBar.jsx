@@ -69,7 +69,7 @@ const SearchBar = () => {
           onChange={handleSearchChange}
           className="w-full px-4 py-2 rounded-md border border-white/30 focus:ring-2 focus:ring-purple-500 focus:outline-none text-white bg-gradient-to-r from-blue-800 via-indigo-900 to-purple-900 placeholder-white shadow-md"
         />
-        <div className="absolute top-1/2 right-4 transform -translate-y-1/2 text-white">
+        <div className="absolute top-1/2 right-4 transform -translate-y-1/2 text-white hover:scale-110">
           <FaSearch />
         </div>
       </div>

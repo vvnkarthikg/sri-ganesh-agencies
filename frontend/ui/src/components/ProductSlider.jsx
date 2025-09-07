@@ -39,7 +39,7 @@ const ProductSlider = ({ title, items }) => {
 
   return (
     <div className="mt-6 px-4 relative">
-      <h2 className="text-sm mb-6 uppercase font-medium">{title}</h2>
+      <h2 className=" inline-block text-sm mb-6 uppercase font-medium bg-gradient-to-r from-fuchsia-500 via-pink-600 to-indigo-500 bg-clip-text text-transparent">{title}</h2>
 
       <Swiper
         modules={[Navigation, Autoplay]}
@@ -122,16 +122,16 @@ const ProductSlider = ({ title, items }) => {
         })}
 
         {/* Navigation Buttons */}
-        <div className="flex justify-center gap-4 mb-4 mt-4">
+        <div className="flex justify-center gap-4 mb-4 mt-4 ">
           <button
             ref={prevRef}
-            className="px-4 py-2 bg-gray-800 text-white rounded hover:bg-gray-700 transition"
+            className="px-4 py-2 bg-gradient-to-tr from-fuchsia-400 via-purple-700 to-purple-600 text-white rounded hover:cursor-pointer hover:scale-95 hover:shadow-xl transition"
           >
             &#8592; Prev
           </button>
           <button
             ref={nextRef}
-            className="px-4 py-2 bg-gray-800 text-white rounded hover:bg-gray-700 transition"
+            className="px-4 py-2 bg-gradient-to-tl from-fuchsia-400 via-purple-700 to-purple-600 text-white rounded hover:bg-gray-700 transition hover:cursor-pointer hover:scale-95 hover:shadow-xl"
           >
             Next &#8594;
           </button>

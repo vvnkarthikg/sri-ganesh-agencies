@@ -17,7 +17,7 @@ function App() {
       <BrowserRouter>
         <Navbar />
 
-        <main className="flex-1 ">
+        <main className="flex-1 bg-gradient-to-br from-sky-300/30 via-white to-purple-200/30">
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/products/:id" element={<ProductDetails />} />
