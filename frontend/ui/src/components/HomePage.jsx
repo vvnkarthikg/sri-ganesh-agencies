@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchProducts } from '../redux-store/slices/productSlice';
 import ProductSlider from './ProductSlider';
 import abstractBg from './images/abstract.svg';
-import banner from './images/banner-image4.png';
+import banner from './images/kjoy3.png';
 import brand1 from './images/kinderjoy.png';
 import brand2 from './images/parle.svg';
 import brand3 from './images/tictac.png';
