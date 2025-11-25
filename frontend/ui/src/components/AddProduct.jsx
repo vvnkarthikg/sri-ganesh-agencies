@@ -49,7 +49,7 @@ const AddProduct = () => {
     });
     if (imageFile) formData.append('productImage', imageFile);
 
-    const result =  dispatch(addProduct(formData));
+    const result = await dispatch(addProduct(formData));
     if (result.meta.requestStatus === 'fulfilled') {
         alert('✅ Product added successfully');
       navigate('/');

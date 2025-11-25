@@ -7,6 +7,8 @@ import { addToCart } from '../redux-store/slices/cartSlice';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import '../index.css';
+import no from './images/no2.png';
+
 
 const ProductSlider = ({ title, items }) => {
   const prevRef = useRef(null);
@@ -73,8 +75,8 @@ const ProductSlider = ({ title, items }) => {
                 <Link to={`/products/${product._id}`}>
                   <div className="h-[65%] border-b border-gray-200 bg-gray-100 px-2">
                     <img
-                      src={product.productImage}
-                      alt={product.name}
+                      src={product.productImage ? product.productImage : no}
+                      alt={no}
                       className="w-full h-full object-contain aspect-[3/2] drop-shadow-md"
                     />
                   </div>

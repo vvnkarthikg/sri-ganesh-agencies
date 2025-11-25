@@ -6,6 +6,7 @@ import { placeOrder } from '../redux-store/slices/orderSlice';
 import { addToCart } from '../redux-store/slices/cartSlice';
 import ProductSlider from './ProductSlider';
 import axiosInstance from '../api/axiosInstance';
+import no from './images/no2.png';
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -110,10 +111,10 @@ const handleUpdateProduct = async () => {
     <section>
       <div className="max-w-5xl mx-auto px-4 py-8 grid md:grid-cols-2 gap-8">
         {/* Image */}
-        <div className="bg-gray-100 p-4 rounded-lg shadow">
+        <div className="bg-gray-100 p-4 rounded-lg ">
           <img
-            src={product.productImage}
-            alt={product.name}
+            src={product.productImage ? product.productImage : no}
+            alt={no}
             className="w-full object-contain aspect-[4/3] rounded"
           />
           {isAdmin && editMode && (
@@ -148,14 +149,16 @@ const handleUpdateProduct = async () => {
               <p className="text-xs text-gray-500 capitalize">{product.category}</p>
               <h1 className="text-lg font-semibold text-gray-800">{product.name}</h1>
               <p className="text-sm text-gray-600">Brand: <span className="font-medium">{product.brand}</span></p>
-              <p className="text-sm text-gray-600">Pack of: <span className="font-medium">{product.packOf}</span></p>
+              <p className=" text-sm text-[#444444] bg-[#f1f3f4] inline-block w-fit p-1 rounded">
+                Pack of <span className="font-medium">{product.packOf}</span>
+              </p>
               <div className="flex items-center gap-3 mt-1">
                 <p className="text-lg font-semibold text-green-600">₹{discountedPrice}</p>
                 <p className="text-gray-600 text-sm line-through">₹{product.price}</p>
-                <span className="text-xs text-white bg-green-600 px-2 py-[2px] rounded">10% margin</span>
+                <span className="text-xs text-[#137333] bg-[#e6f4ea] px-2 py-[2px] rounded">10% margin</span>
               </div>
-              <p className="text-xs mt-1 text-gray-500">
-                <span className="font-bold">{product.quantity}</span> in stock
+              <p className="text-xs mt-1 ">
+                <span className="font-bold text-md">{product.quantity}</span> in stock
               </p>
               <p className="text-gray-600 mt-2 text-xs">{product.description}</p>
 
@@ -169,11 +172,11 @@ const handleUpdateProduct = async () => {
                 <div className="flex gap-4 mt-4">
                   <button
                     onClick={() => dispatch(addToCart({ pId: product._id, quantity }))}
-                    className="px-6 py-2 bg-blue-600 text-white rounded cursor-pointer hover:bg-blue-700 transition"
+                    className="px-6 py-2 bg-blue-600 text-white rounded-md cursor-pointer hover:bg-blue-700 transition"
                   >Add to Cart</button>
                   <button
                     onClick={() => dispatch(placeOrder({ id: product._id, quantity }))}
-                    className="px-6 py-2 bg-green-600 text-white rounded cursor-pointer hover:bg-red-700 transition"
+                    className="px-6 py-2 bg-green-600 text-white rounded-md cursor-pointer hover:bg-green-700 transition"
                   >Order Now</button>
                 </div>
               )}
