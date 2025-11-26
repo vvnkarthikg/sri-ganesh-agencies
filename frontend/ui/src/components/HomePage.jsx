@@ -35,7 +35,7 @@ const HomePage = () => {
       {/* Banner Section */}
       
         <div className="flex justify-center items-center w-full mb-4">
-            <img src={banner} alt="Banner" className="w-full h-auto rounded-lg shadow-xl object-cover"/>
+            <img src={banner} alt="Banner" className="w-full h-auto shadow-xl object-cover"/>
         </div>
         
       {/* Brands Display */}

@@ -44,6 +44,7 @@ const Orders = () => {
     const newQty = parseInt(editQty[orderId], 10);
     if (!isNaN(newQty) && newQty > 0) {
       dispatch(changeOrderQuantity({ orderId, productId, newQuantity: newQty }));
+      console.log("changing quat");
       setEditQty((prev) => ({ ...prev, [orderId]: undefined }));
     }
   };
@@ -65,7 +66,7 @@ const Orders = () => {
     return <div className="text-center py-10 text-gray-400">No orders found.</div>;
 
   return (
-    <section className="max-w-6xl mx-auto px-4 py-8">
+    <section className="max-w-4xl mx-auto px-4 py-8">
       <h2 className="text-2xl font-bold mb-6 text-gray-800">Your Orders</h2>
 
       <div className="space-y-5">
@@ -77,7 +78,7 @@ const Orders = () => {
             {/* Header */}
             <div className="flex justify-between items-center pb-2 mb-3">
               <div>
-                <p className="text-md text-gray-700 font-semibold">Order # {order.orderNumber}</p>
+                <p className="text-md text-gray-700 font-semibold mb-1">Order # {order.orderNumber}</p>
                 <p className="text-xs text-gray-500">Placed on {new Date(order.createdOn).toLocaleString()}</p>
               </div>
               <span
@@ -100,49 +101,53 @@ const Orders = () => {
               <img
                 src={order.product?.productImage || '/no-image.png'}
                 alt={order.product?.name || 'Product'}
-                className="w-24 h-24 object-contain rounded bg-gray-100"
+                className="w-26 h-26 object-contain rounded bg-gray-100"
               />
-              <div className="flex-1">
-                <p className="font-medium text-gray-900">{order.product?.name || 'Unnamed Product'}</p>
-                <p className="text-sm text-gray-600">
-                  Quantity:{' '}
-                  {editQty[order.id] !== undefined ? (
-                    <>
-                      <input
-                        type="number"
-                        min={1}
-                        value={editQty[order.id]}
-                        onChange={(e) => handleQtyChange(order.id, e.target.value)}
-                        className="border rounded px-1 w-16"
-                      />
-                      <button
-                        onClick={() => handleSubmitQty(order.id, order.product?._id)}
-                        className="ml-2 px-2 py-0.5 text-sm bg-green-500 text-white rounded"
-                      >
-                        Save
-                      </button>
-                      <button
-                        onClick={() => setEditQty((prev) => ({ ...prev, [order.id]: undefined }))}
-                        className="ml-1 px-2 py-0.5 text-sm bg-gray-400 text-white rounded"
-                      >
-                        Cancel
-                      </button>
-                    </>
-                  ) : (
-                    <>
-                      <span className="font-semibold">{order.quantity}</span>
-                      <button
-                        onClick={() => setEditQty((prev) => ({ ...prev, [order.id]: order.quantity }))}
-                        className="ml-3 text-sm text-indigo-600 px-2 py-1 rounded-md"
-                      >
-                        edit
-                      </button>
-                    </>
-                  )}
-                </p>
-                <p className="text-sm text-gray-600">
-                  Price: <span className="font-semibold">₹{order.product?.price}</span>
-                </p>
+              <div className="flex flex-1 justify-between items-start">
+                <div>
+                  <p className="font-medium text-gray-900">{order.product?.name || 'Unnamed Product'}</p>
+                  <p className="text-sm text-gray-600">
+                    Quantity:{' '}
+                    {editQty[order.id] !== undefined ? (
+                      <>
+                        <input
+                          type="number"
+                          min={1}
+                          value={editQty[order.id]}
+                          onChange={(e) => handleQtyChange(order.id, e.target.value)}
+                          className="border rounded px-1 w-16"
+                        />
+                        <button
+                          onClick={() => handleSubmitQty(order.id, order.product._id)}
+                          className="ml-2 px-2 py-0.5 text-sm bg-green-500 text-white rounded"
+                        >
+                          Save
+                        </button>
+                        <button
+                          onClick={() => setEditQty((prev) => ({ ...prev, [order.id]: undefined }))}
+                          className="ml-1 px-2 py-0.5 text-sm bg-gray-400 text-white rounded"
+                        >
+                          Cancel
+                        </button>
+                      </>
+                    ) : (
+                      <>
+                        <span className="font-semibold">{order.quantity}</span>
+                        <button
+                          onClick={() => setEditQty((prev) => ({ ...prev, [order.id]: order.quantity }))}
+                          className="ml-3 text-xs text-indigo-600 px-2 py-1 rounded-md"
+                        >
+                          Edit
+                        </button>
+                      </>
+                    )}
+                  </p>
+                </div>
+                <div>
+                  <p className="pr-4 text-lg font-bold">
+                    ₹{order.product?.price}
+                  </p>
+                </div>
               </div>
             </div>
 
@@ -150,34 +155,36 @@ const Orders = () => {
             <div className="mt-4 flex flex-wrap justify-end gap-3 text-sm">
               <button
                 onClick={() => handleCancel(order.id)}
-                className="px-3 py-1 rounded text-gray-600 border hover:bg-"
+                className={`px-3 py-1 rounded text-gray-600 border text-xs hover:bg- ${
+                  (order.status=='Completed' || order.status=='Cancelled')?'hidden':''
+                }`}
               >
                 Cancel
               </button>
 
               {isAdmin && (
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 text-xs">
                   {editStatus[order.id] !== undefined ? (
                     <>
                       <select
                         value={editStatus[order.id]}
                         onChange={(e) => handleStatusChange(order.id, e.target.value)}
-                        className="border rounded px-2 py-1"
+                        className="text-white rounded px-2 py-1 bg-indigo-600"
                       >
-                        <option value="Processing">Processing</option>
-                        <option value="Completed">Completed</option>
-                        <option value="Failed">Failed</option>
-                        <option value="Cancelled">Cancelled</option>
+                        <option className="bg-white text-gray-900" value="Processing">Processing</option>
+                        <option className="bg-white text-gray-900" value="Completed">Completed</option>
+                        <option className="bg-white text-gray-900" value="Failed">Failed</option>
+                        <option className="bg-white text-gray-900" value="Cancelled">Cancelled</option>
                       </select>
                       <button
                         onClick={() => handleSubmitStatus(order.id)}
-                        className="px-2 py-1 text-sm bg-green-500 text-white rounded"
+                        className="px-2 py-1 text-xs bg-green-500 text-white rounded"
                       >
                         Save
                       </button>
                       <button
                         onClick={() => setEditStatus((prev) => ({ ...prev, [order.id]: undefined }))}
-                        className="px-2 py-1 text-sm bg-gray-400 text-white rounded"
+                        className="px-2 py-1 text-xs text-gray-600 border rounded"
                       >
                         Cancel
                       </button>
@@ -185,7 +192,7 @@ const Orders = () => {
                   ) : (
                     <button
                       onClick={() => setEditStatus((prev) => ({ ...prev, [order.id]: order.status }))}
-                      className="px-3 py-1 rounded bg-blue-700 text-white hover:bg-blue-600"
+                      className="px-3 py-1 rounded bg-blue-700 text-white hover:bg-blue-600 text-xs"
                     >
                       Change Status
                     </button>

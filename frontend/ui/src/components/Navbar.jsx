@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from './images/logo.png';
+import logo from './images/logo2.png';
 import { Link, useNavigate } from 'react-router-dom';
 import SearchBar from './SearchBar';
 
@@ -23,8 +23,8 @@ const Navbar = () => {
     <nav className="bg-gradient-to-tr from-blue-800 via-indigo-800 to-purple-900 px-6 py-3 shadow-lg text-white">
       <div className="w-full flex items-center justify-between space-x-4">
         {/* Logo */}
-        <div className="flex items-center space-x-3">
-          <img src={logo} alt="Logo" className="h-10 w-10 rounded-full" />
+        <div className="flex items-center space-x-3 bg-yellow">
+          <img src={logo} alt="Logo" className="h-12 w-12 bg-red" />
           <span className="text-lg font-semibold tracking-wide">
             Sri Ganesh Agencies
           </span>
