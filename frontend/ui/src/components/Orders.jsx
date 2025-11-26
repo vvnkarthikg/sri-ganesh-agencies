@@ -75,20 +75,20 @@ const Orders = () => {
             className="border border-gray-300 rounded-md bg-white shadow-sm hover:shadow-md transition-all duration-200 p-4"
           >
             {/* Header */}
-            <div className="flex justify-between items-center border-b pb-2 mb-3">
+            <div className="flex justify-between items-center pb-2 mb-3">
               <div>
-                <p className="text-sm text-gray-700 font-semibold">Order # {order.orderNumber}</p>
-                <p className="text-xs text-gray-500">Placed on: {new Date(order.createdOn).toLocaleString()}</p>
+                <p className="text-md text-gray-700 font-semibold">Order # {order.orderNumber}</p>
+                <p className="text-xs text-gray-500">Placed on {new Date(order.createdOn).toLocaleString()}</p>
               </div>
               <span
-                className={`text-xs font-medium px-2 py-1 rounded ${
+                className={`text-xs font-medium px-2 py-1 rounded-md ${
                   order.status === 'Completed'
-                    ? 'bg-green-500 text-white'
+                    ? 'bg-green-200 text-green-800'
                     : order.status === 'Processing'
-                    ? 'bg-yellow-400 text-white'
+                    ? 'bg-yellow-100 text-yellow-800'
                     : order.status === 'Failed'
-                    ? 'bg-red-500 text-white'
-                    : 'bg-gray-400 text-white'
+                    ? 'bg-red-200 text-red-800'
+                    : 'bg-gray-200 text-gray-800'
                 }`}
               >
                 {order.status}
@@ -133,7 +133,7 @@ const Orders = () => {
                       <span className="font-semibold">{order.quantity}</span>
                       <button
                         onClick={() => setEditQty((prev) => ({ ...prev, [order.id]: order.quantity }))}
-                        className="ml-3 bg-blue-500 text-sm text-white px-2 py-1 rounded-md"
+                        className="ml-3 text-sm text-indigo-600 px-2 py-1 rounded-md"
                       >
                         edit
                       </button>
@@ -150,7 +150,7 @@ const Orders = () => {
             <div className="mt-4 flex flex-wrap justify-end gap-3 text-sm">
               <button
                 onClick={() => handleCancel(order.id)}
-                className="px-3 py-1 rounded bg-gray-500 text-white hover:bg-gray-600"
+                className="px-3 py-1 rounded text-gray-600 border hover:bg-"
               >
                 Cancel
               </button>
@@ -185,7 +185,7 @@ const Orders = () => {
                   ) : (
                     <button
                       onClick={() => setEditStatus((prev) => ({ ...prev, [order.id]: order.status }))}
-                      className="px-3 py-1 rounded bg-blue-500 text-white hover:bg-blue-600"
+                      className="px-3 py-1 rounded bg-blue-700 text-white hover:bg-blue-600"
                     >
                       Change Status
                     </button>
